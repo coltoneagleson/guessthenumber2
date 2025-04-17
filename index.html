@@ -2,39 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Guess the Number Game</title>
+  <title>Colton's Game</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 50px;
       text-align: center;
+      background: linear-gradient(to bottom right, #3b8beb, #1a1aff);
+      color: white;
     }
+
     input[type="number"] {
       padding: 8px;
-      width: 50px;
+      width: 60px;
+      border: none;
+      border-radius: 5px;
     }
+
     button {
-      padding: 8px 16px;
-      margin-left: 10px;
+      padding: 10px 18px;
+      margin: 10px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #1a1aff;
+      cursor: pointer;
+      transition: transform 0.1s;
     }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
     #message {
       margin-top: 20px;
-      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px #00000066;
     }
   </style>
 </head>
 <body>
 
-  <h1>Guess the Number!</h1>
+  <h1>Colton's Game</h1>
   <p>Pick a number between 1 and 10:</p>
 
   <input type="number" id="guess" min="1" max="10">
   <button onclick="checkGuess()">Guess</button>
+  <button onclick="resetGame()">Retry</button>
 
   <div id="message"></div>
 
   <script>
-    // Generate a random number between 1 and 10
     let answer = Math.floor(Math.random() * 10) + 1;
 
     function checkGuess() {
@@ -43,19 +67,23 @@
 
       if (isNaN(userGuess) || userGuess < 1 || userGuess > 10) {
         messageDiv.textContent = "Please enter a number between 1 and 10.";
-        messageDiv.style.color = "orange";
+        messageDiv.style.color = "yellow";
         return;
       }
 
       if (userGuess === answer) {
-        messageDiv.textContent = "Congratulations! You guessed it!";
-        messageDiv.style.color = "green";
-        // Generate a new number for the next round
-        answer = Math.floor(Math.random() * 10) + 1;
+        messageDiv.textContent = "🎉 Congratulations! You guessed it!";
+        messageDiv.style.color = "#00ffcc";
       } else {
-        messageDiv.textContent = "Sorry, that's not it. Try again!";
-        messageDiv.style.color = "red";
+        messageDiv.textContent = "❌ Nope, try again!";
+        messageDiv.style.color = "#ffcccc";
       }
+    }
+
+    function resetGame() {
+      answer = Math.floor(Math.random() * 10) + 1;
+      document.getElementById("guess").value = "";
+      document.getElementById("message").textContent = "";
     }
   </script>
 
