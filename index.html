@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      text-align: center;
+    }
+    input[type="number"] {
+      padding: 8px;
+      width: 50px;
+    }
+    button {
+      padding: 8px 16px;
+      margin-left: 10px;
+    }
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Guess the Number!</h1>
+  <p>Pick a number between 1 and 10:</p>
+
+  <input type="number" id="guess" min="1" max="10">
+  <button onclick="checkGuess()">Guess</button>
+
+  <div id="message"></div>
+
+  <script>
+    // Generate a random number between 1 and 10
+    let answer = Math.floor(Math.random() * 10) + 1;
+
+    function checkGuess() {
+      const userGuess = parseInt(document.getElementById("guess").value);
+      const messageDiv = document.getElementById("message");
+
+      if (isNaN(userGuess) || userGuess < 1 || userGuess > 10) {
+        messageDiv.textContent = "Please enter a number between 1 and 10.";
+        messageDiv.style.color = "orange";
+        return;
+      }
+
+      if (userGuess === answer) {
+        messageDiv.textContent = "Congratulations! You guessed it!";
+        messageDiv.style.color = "green";
+        // Generate a new number for the next round
+        answer = Math.floor(Math.random() * 10) + 1;
+      } else {
+        messageDiv.textContent = "Sorry, that's not it. Try again!";
+        messageDiv.style.color = "red";
+      }
+    }
+  </script>
+
+</body>
+</html>
